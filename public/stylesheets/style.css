@@ -1,0 +1,27 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.upload-hide{
+  z-index: 10;
+  opacity: 0;
+}
+.margin-20{
+  margin: 20px 0;
+}
+.padding-20{
+  padding: 20px 0;
+}
+.upload{
+  position: absolute;
+  top: 0;
+  left: 15px;
+}
+.border{
+  border-right: 2px solid #999999;
+}

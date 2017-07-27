@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/plug-in/bootstrap/css/bootstrap.min.css"/>
+    <link rel='stylesheet' href='/stylesheets/style.css'/>
+</head>
+<body>
+<h1 class="text-center">Excel / Json 相互转换</h1>
+
+<div style="width: 50%;float: left;">
+    <p class="text-center margin-20">表格文件转换成json文件</p>
+
+    <form class="form-horizontal border" action="/upload/excel" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label class="control-label col-sm-4">填写表格名字</label>
+
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="tableName" placeholder="请输入要转换表的名字"/>
+
+                <p class="text-info">说明：如果一个文件里面有多种表，请输入要转换的表格。xlsx文件中只有一个表格则不用输入。</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-sm-4">上传需要转换的文件</label>
+
+            <div class="col-sm-7" style="position: relative;height: 40px;">
+                <input name="excel" type="file" id="excelFile" class="form-control upload upload-hide"
+                       onchange="getFilePath('excel')"/>
+                <input type="text" id="excel" class="form-control upload" placeholder="请选择需要上传的xlsx文件"/>
+            </div>
+        </div>
+        <div class="col-sm-offset-4">
+            <input class="btn btn-primary" type="submit" id="excelSubmit" value="提交" disabled>
+        </div>
+    </form>
+</div>
+
+
+<div style="width: 50%;float: left;">
+    <p class="text-center margin-20">json文件转换成表格文件(xlsx)</p>
+
+    <form class="form-horizontal" action="/upload/json" method="post" enctype="multipart/form-data">
+        <!--<div class="form-group">
+            <label class="control-label col-sm-4">填写表格名字</label>
+
+            <div class="col-sm-7">
+                <input type="text" class="form-control" name="tableName" placeholder="请输入要转换表的名字"/>
+
+                <p class="text-info">说明：如果一个文件里面有多种表，请输入要转换的表格。xlsx文件中只有一个表格则不用输入。</p>
+            </div>
+        </div>-->
+        <div class="form-group">
+            <label class="control-label col-sm-4">上传需要转换的文件</label>
+            <div class="col-sm-7" style="position: relative;height: 40px;">
+                <input name="json" type="file" id="jsonFile" class="form-control upload upload-hide"
+                       onchange="getFilePath('json')"/>
+                <input type="text" id="json" class="form-control upload" placeholder="请选择需要上传的xlsx文件"/>
+            </div>
+        </div>
+        <div class="col-sm-offset-4">
+            <input class="btn btn-primary" type="submit" id="jsonSubmit" value="提交" disabled>
+        </div>
+    </form>
+</div>
+
+<script type="text/javascript" src="/plug-in/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/plug-in/bootstrap/js/bootstrap.js"></script>
+<script type="text/javascript">
+    function getFilePath(id) {
+        var path = $('#' + id + "File").val();
+        $('#' + id).val(path);
+        var suffix = path.split('.')[(path.split('.')).length - 1];
+        if (id == 'json') {
+            if (suffix == 'json') {
+                $('#' + id + "Submit").removeAttr('disabled');
+            } else {
+                alert("允许上传的格式为json");
+            }
+        } else {
+            if (suffix == 'xlsx' || suffix == 'xlsm' || suffix == 'xlsb') {
+                $('#' + id + "Submit").removeAttr('disabled')
+            } else {
+                alert("允许上传的格式为xlsx,xlsm,xlsb");
+            }
+        }
+    }
+</script>
+</body>
+</html>
